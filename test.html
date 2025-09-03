@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>JSBridge Test</title>
+    <script>
+        // 定义消息处理函数
+        ToutiaoJSBridge._handleMessageFromToutiao = function(message){
+            alert(JSON.stringify(message))
+        };
+
+        // 按钮点击事件处理函数
+        function callJSBridge() {
+            window.ToutiaoJSBridge.invokeMethod(JSON.stringify({
+                "func": "app.getUserInfo", // JSB方法名
+                "params": {}, // 参数对象
+                "JSSDK": "2.2.9", // 鹊桥SDK版本号
+                "__msg_type": "call", // 消息类型
+                "__callback_id": "1024" // 回调ID
+            }));
+        }
+    </script>
+</head>
+<body>
+    <h1>JSBridge调用测试页面</h1>
+    <button onclick="callJSBridge()">点击调用JSBridge</button>
+    <p>点击按钮后查看浏览器弹窗获取调用结果</p>
+</body>
+</html>
