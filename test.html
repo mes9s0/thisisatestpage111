@@ -3,26 +3,48 @@
 <head>
     <title>JSBridge Test</title>
     <script>
-        // 定义消息处理函数
+        function JS2NativeBridgeObject(){
+            alert("Window 对象:", Object.keys(window.JS2NativeBridge));
+        }
+
+
+
         ToutiaoJSBridge._handleMessageFromToutiao = function(message){
             alert(JSON.stringify(message))
         };
 
         // 按钮点击事件处理函数
-        function callJSBridge() {
+        function callUserInfoAndroidJSBridge() {
             window.ToutiaoJSBridge.invokeMethod(JSON.stringify({
-                "func": "app.getUserInfo", // JSB方法名
-                "params": {}, // 参数对象
-                "JSSDK": "2.2.9", // 鹊桥SDK版本号
-                "__msg_type": "call", // 消息类型
-                "__callback_id": "1024" // 回调ID
+                "func": "app.getUserInfo",
+                "params": {},
+                "JSSDK": "2.2.9",
+                "__msg_type": "call",
+                "__callback_id": "1024"
             }));
         }
+
+
+
+        function callUserInfoIOSJSBridge(){
+            window.JS2NativeBridge.invokeMethod(JSON.stringify({
+                "func":"app.getUserInfo",
+                "__msg_type":"callback",
+                "params":{},
+                "JSSDK":"1",
+                "__msg_type": "call",
+                "__callback_id": "1024"
+            }));
+        }
+
+        
     </script>
 </head>
 <body>
     <h1>JSBridge调用测试页面</h1>
-    <button onclick="callJSBridge()">点击调用JSBridge</button>
-    <p>点击按钮后查看浏览器弹窗获取调用结果</p>
+    <button onclick="callUserInfoJSBridge()">点击调用AndroidUserInfo</button>
+    <button onclick="callUserInfoIOSJSBridge()">点击调用IOSUserInfo</button>
+    <button onclick="JS2NativeBridgeObject()">点击查看JS2NativeBridge对象</button>
+
 </body>
 </html>
