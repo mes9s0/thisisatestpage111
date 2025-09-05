@@ -39,22 +39,16 @@
 
 
         function callfetchIOSJSBridge(){
-            window.JS2NativeBridge.invokeMethod(
-                            JSON.stringify(
-                                {
-                                    "__callback_id":"0",
-                                    "func":"app.fetch",
-                                    "__msg_type":"callback",
-                                    "params":{
-                                        "url":"https://www.baidu.com",
-                                        "method":"GET"
-                                    },
-                                    "JSSDK":"1",
-                                    "namespace":"host",
-                                    "__iframe_url":""
-                                }   
-                            )
-                        );
+            window.JS2NativeBridge._invokeMethod(JSON.stringify({
+                "func": "app.fetch",
+                "params": {
+                    "url": "https://www.baidu.com",
+                    "method": "GET"
+                },
+                "JSSDK": "2.2.9",
+                "__msg_type": "call",
+                "__callback_id": "1024"
+            }));
         }
 
 
@@ -64,9 +58,9 @@
 <body>
     <h1>JSBridge调用测试页面</h1>
     <button onclick="callUserInfoJSBridge()">点击调用AndroidUserInfo</button>
-    <button onclick="callUserInfoIOSJSBridge()">点击调用IOSUserInfo</button>
-    <button onclick="JS2NativeBridgeObject()">点击查看JS2NativeBridge对象</button>
-    <button onclick="callfetchIOSJSBridge()">点击查看fetch流量</button>
+    <button onclick="callUserInfoIOSJSBridge()">点击调用IOSUserInfo（暂不可用）</button>
+    <button onclick="JS2NativeBridgeObject()">点击查看JS2NativeBridge对象（暂不可用）</button>
+    <button onclick="callfetchIOSJSBridge()">点击查看fetch流量（暂不可用）</button>
 
 </body>
 </html>
